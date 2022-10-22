@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public float ballSpeedIncrement;
     public int pointsToVictory;
 
-    public string _state;
+    private string _state;
     public string State
     {
         get => _state;
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (State == "Game Over" && Input.GetKeyUp(startKey))
+        if ((State == "Game Over" || State == "Serve") && Input.GetKeyUp(startKey))
         {
             State = "Play";
             messagesGUI.enabled = false;

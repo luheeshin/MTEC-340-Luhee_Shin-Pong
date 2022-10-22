@@ -20,7 +20,7 @@ public class PaddleMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.State == "Pause")
+        if (GameManager.Instance.State != "Pause")
         {
             if (Input.GetKey(up) && transform.position.y <= yEdge)
                 transform.position += new Vector3(0, movementSpeed * Time.deltaTime, 0);
