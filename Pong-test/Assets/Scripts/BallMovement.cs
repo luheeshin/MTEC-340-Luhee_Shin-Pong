@@ -5,6 +5,12 @@ using UnityEngine;
 public class BallMovement : MonoBehaviour
 {
 
+    public GameObject hitSound;
+    public GameObject collisionSound;
+    public GameObject ScoreSound;
+    public GameObject GameOverSound;
+
+
     public float yEdge;
     public float xBounds;
 
@@ -12,7 +18,7 @@ public class BallMovement : MonoBehaviour
     private Rigidbody2D rb2d;
 
 
-    public AudioClip collisionSound;
+   
 
     private void Awake()
     {
@@ -39,12 +45,15 @@ public class BallMovement : MonoBehaviour
                Death();
 
         }
+        
     }
 
     private void Death()
     {
         GameManager.Instance.UpdateScore(transform.position.x > 0 ? 1 : 2);
         Reset();
+
+        Instantiate(ScoreSound, transform.position, transform.rotation);
     }
 
     private void WallCollision()
@@ -55,6 +64,7 @@ public class BallMovement : MonoBehaviour
             rb2d.position.x,
             rb2d.position.y > 0 ? yEdge - 0.01f : -yEdge + 0.01f
             ));
+        Instantiate(collisionSound, transform.position, transform.rotation);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -65,6 +75,8 @@ public class BallMovement : MonoBehaviour
             velocity.x = IncrementSpeed(velocity.x);
             velocity.y = IncrementSpeed(velocity.y);
         }
+
+        Instantiate(hitSound, transform.position, transform.rotation);
     }
 
     private float IncrementSpeed(float axis)
@@ -79,6 +91,7 @@ public class BallMovement : MonoBehaviour
         GameManager.Instance.State = "Serve";
         GameManager.Instance.messagesGUI.text = "Press Enter";
         GameManager.Instance.messagesGUI.enabled = true;
+        
 
         rb2d.MovePosition(new Vector2(0, 0));
 
@@ -86,6 +99,7 @@ public class BallMovement : MonoBehaviour
             GameManager.Instance.initBallSpeed * (Random.Range(0f, 1.0f) < 0.5f ? 1 : -1),
             GameManager.Instance.initBallSpeed * (Random.Range(0f, 1.0f) < 0.5f ? 1 : -1));
 
+        Instantiate(GameOverSound, transform.position, transform.rotation);
 
     }
     
