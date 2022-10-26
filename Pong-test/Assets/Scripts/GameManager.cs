@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     public Player P1;
     public Player P2;
 
+    public AudioClip GameOverSound;
+    public AudioClip EnterSound;
+
     private Player[] Players = new Player[2];
 
     public float initBallSpeed;
@@ -59,6 +62,8 @@ public class GameManager : MonoBehaviour
         {
             State = "Play";
             messagesGUI.enabled = false;
+            PlaySound(EnterSound);
+            // can add enter sound
         }
 
         else if (Input.GetKeyUp(pauseKey))
@@ -86,9 +91,10 @@ public class GameManager : MonoBehaviour
     {
         foreach (Player p in Players)
             p.Score = 0;
+        PlaySound(GameOverSound);
     }
 
-    public void PlaySound(AudioClip clip, float volume=1.0f)
+    public void PlaySound(AudioClip clip, float volume=1.0f) //이걸 추가하고, 위에서 오디오 정의 한 후 소리 추가할 부분에 쓰면 됨. 
     {
         m_audioSource.volume = volume;
         m_audioSource.PlayOneShot(clip);

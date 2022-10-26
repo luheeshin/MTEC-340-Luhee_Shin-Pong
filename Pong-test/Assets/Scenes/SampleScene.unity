@@ -608,6 +608,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   P1: {fileID: 1184459525}
   P2: {fileID: 596322176}
+  GameOverSound: {fileID: 8300000, guid: 2291a6d6e9d854f9c99860e09eb53bce, type: 3}
+  EnterSound: {fileID: 8300000, guid: f801b4f2d4b694492b9e09ce534ebe7b, type: 3}
   initBallSpeed: 5
   ballSpeedIncrement: 0.5
   pointsToVictory: 5
